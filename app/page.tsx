@@ -4,6 +4,7 @@ import {
   HeroSection,
   FeaturesSection,
   HowItWorksSection,
+  PricingSection,
 } from "@/components/sections";
 
 export default function Home() {
@@ -12,22 +13,9 @@ export default function Home() {
       <HeroSection />
       <FeaturesSection />
       <HowItWorksSection />
+      <PricingSection />
 
       {/* Placeholder sections - will be built in next stages */}
-      <section id="pricing" className="section-padding bg-muted/30">
-        <div className="container-wide">
-          <div className="text-center">
-            <span className="inline-flex items-center rounded-full bg-brand-100 px-4 py-1.5 text-sm font-medium text-brand-700 mb-4">
-              Coming in Stage 7
-            </span>
-            <h2 className="text-3xl font-bold">Pricing Section</h2>
-            <p className="mt-2 text-muted-foreground">
-              Flexible plans for creators of all sizes
-            </p>
-          </div>
-        </div>
-      </section>
-
       <section id="testimonials" className="section-padding">
         <div className="container-wide">
           <div className="text-center">
