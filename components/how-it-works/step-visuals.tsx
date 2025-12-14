@@ -49,7 +49,7 @@ export function StepVisuals({ activeStep }: StepVisualsProps) {
 function InputVisual() {
   const [inputText, setInputText] = React.useState("");
   const fullText =
-    "10 Proven Strategies to Grow Your SaaS Business in 2024\n\nIn today's competitive landscape, growing a SaaS business requires a combination of smart strategy, relentless execution, and customer-centric thinking...\n\nStrategy #1: Focus on Customer Success\nThe best marketing is a happy customer. Invest in onboarding, support, and success programs that turn users into advocates.";
+    "10 Proven Strategies to Grow Your SaaS Business in 2026\n\nIn today's competitive landscape, growing a SaaS business requires a combination of smart strategy, relentless execution, and customer-centric thinking...\n\nStrategy #1: Focus on Customer Success\nThe best marketing is a happy customer. Invest in onboarding, support, and success programs that turn users into advocates.";
 
   React.useEffect(() => {
     let index = 0;
@@ -250,7 +250,7 @@ function OutputVisual() {
       icon: Icons.twitter,
       color: "#1DA1F2",
       status: "ready",
-      preview: "🧵 Here's what I learned about SaaS growth in 2024...",
+      preview: "🧵 Here's what I learned about SaaS growth in 2026...",
     },
     {
       platform: "LinkedIn Post",

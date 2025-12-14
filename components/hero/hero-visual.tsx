@@ -88,7 +88,7 @@ function InputSection() {
               className="text-sm text-foreground"
             >
               <TypewriterEffect
-                text="10 Proven Strategies to Grow Your SaaS Business in 2024: A comprehensive guide covering customer acquisition, retention, pricing optimization..."
+                text="10 Proven Strategies to Grow Your SaaS Business in 2026: A comprehensive guide covering customer acquisition, retention, pricing optimization..."
                 speed={25}
               />
             </motion.div>
@@ -163,7 +163,7 @@ function OutputSection() {
       platform: "LinkedIn Post",
       icon: <Icons.linkedin className="h-4 w-4" />,
       color: "#0A66C2",
-      content: "I've spent 5 years building SaaS companies. Here's what actually works in 2024...",
+      content: "I've spent 5 years building SaaS companies. Here's what actually works in 2026...",
       delay: 6.3,
     },
     {
