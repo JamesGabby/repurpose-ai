@@ -28,6 +28,12 @@ export function HeroSection() {
       >
         {/* Background */}
         <GradientBackground variant="hero" />
+        
+        {/* Subtle ambient glow - reduced opacity */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-500/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl" />
+        </div>
 
         <div className="container-wide relative z-10">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 xl:gap-16 items-center">
@@ -38,20 +44,26 @@ export function HeroSection() {
                 <AnimatedBadge
                   variant="glow"
                   pulse
-                  icon={<Icons.sparkles className="h-3.5 w-3.5 text-brand-500" />}
-                  className="mb-6"
+                  icon={<Icons.sparkles className="h-3.5 w-3.5 text-brand-600 dark:text-brand-400" />}
+                  className="mb-6 border-brand-200 dark:border-brand-800 bg-brand-50 dark:bg-brand-950/80"
                 >
-                  {heroData.badge}
+                  <span className="text-brand-700 dark:text-brand-300 font-semibold">
+                    {heroData.badge}
+                  </span>
                 </AnimatedBadge>
               </MotionWrapper>
 
-              {/* Headline */}
+              {/* Headline - HIGH CONTRAST */}
               <MotionWrapper animation="fadeInUp" delay={0.1}>
                 <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl">
-                  <AnimatedWords text={heroData.headline.main} delay={0.2} />
+                  {/* Main headline - solid dark color for maximum readability */}
+                  <span className="text-gray-900 dark:text-white">
+                    <AnimatedWords text={heroData.headline.main} delay={0.2} />
+                  </span>
                   <br className="hidden sm:block" />
+                  {/* Highlighted part - gradient but still readable */}
                   <span className="relative inline-block mt-2">
-                    <span className="gradient-text-animated">
+                    <span className="bg-gradient-to-r from-brand-600 via-purple-600 to-pink-600 dark:from-brand-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
                       {heroData.headline.highlight}
                     </span>
                     {/* Decorative underline */}
@@ -80,7 +92,7 @@ export function HeroSection() {
                           x2="100%"
                           y2="0%"
                         >
-                          <stop offset="0%" stopColor="#6366f1" />
+                          <stop offset="0%" stopColor="#7c3aed" />
                           <stop offset="50%" stopColor="#a855f7" />
                           <stop offset="100%" stopColor="#ec4899" />
                         </linearGradient>
@@ -90,22 +102,24 @@ export function HeroSection() {
                 </h1>
               </MotionWrapper>
 
-              {/* Subheadline */}
+              {/* Subheadline - IMPROVED CONTRAST */}
               <MotionWrapper animation="fadeInUp" delay={0.2}>
-                <p className="mt-6 text-lg text-muted-foreground md:text-xl leading-relaxed">
+                <p className="mt-6 text-lg md:text-xl leading-relaxed max-w-xl text-gray-600 dark:text-gray-300">
                   {heroData.subheadline}
                 </p>
               </MotionWrapper>
 
-              {/* Platform Pills */}
+              {/* Platform Pills - BETTER VISIBILITY */}
               <MotionWrapper animation="fadeInUp" delay={0.3}>
-                <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
-                  <span>Create content for</span>
-                  <span className="font-semibold">
+                <div className="mt-6 flex items-center gap-2 text-base">
+                  <span className="text-gray-600 dark:text-gray-400 font-medium">
+                    Create content for
+                  </span>
+                  <span className="font-bold px-3 py-1.5 rounded-full bg-brand-100 dark:bg-brand-900/80 border border-brand-300 dark:border-brand-700">
                     <RotatingText
                       texts={heroData.platforms}
                       interval={2000}
-                      className="text-brand-600 dark:text-brand-400 min-w-[100px]"
+                      className="text-brand-700 dark:text-brand-200 min-w-[100px]"
                     />
                   </span>
                 </div>
@@ -131,7 +145,7 @@ export function HeroSection() {
                           <Icons.arrowRight className="h-5 w-5" />
                         </motion.span>
                       }
-                      className="w-full sm:w-auto"
+                      className="w-full sm:w-auto shadow-lg shadow-brand-500/30"
                     >
                       {heroData.cta.primary.text}
                     </CustomButton>
@@ -141,85 +155,131 @@ export function HeroSection() {
                     size="xl"
                     onClick={() => setIsVideoOpen(true)}
                     leftIcon={
-                      <span className="relative">
-                        <Icons.play className="h-5 w-5" />
-                        <span className="absolute inset-0 animate-ping rounded-full bg-brand-500/20" />
+                      <span className="relative flex items-center justify-center">
+                        <span className="absolute inset-0 rounded-full bg-brand-500/20 animate-ping" />
+                        <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-900 border border-brand-300 dark:border-brand-700">
+                          <Icons.play className="h-4 w-4 text-brand-700 dark:text-brand-300 ml-0.5" />
+                        </span>
                       </span>
                     }
-                    className="w-full sm:w-auto"
+                    className="w-full sm:w-auto border-2 border-gray-300 dark:border-gray-600 hover:border-brand-400 dark:hover:border-brand-500 text-gray-900 dark:text-white"
                   >
                     {heroData.cta.secondary.text}
                   </CustomButton>
                 </div>
               </MotionWrapper>
 
-              {/* Trust Signals */}
+              {/* Trust Signals - HIGH CONTRAST */}
               <MotionWrapper animation="fadeInUp" delay={0.5}>
-                <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-green-500/10">
-                      <Icons.check className="h-3 w-3 text-green-500" />
-                    </span>
-                    <span>No credit card required</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-green-500/10">
-                      <Icons.check className="h-3 w-3 text-green-500" />
-                    </span>
-                    <span>14-day free trial</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-green-500/10">
-                      <Icons.check className="h-3 w-3 text-green-500" />
-                    </span>
-                    <span>Cancel anytime</span>
-                  </div>
+                <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
+                  {[
+                    "No credit card required",
+                    "14-day free trial",
+                    "Cancel anytime",
+                  ].map((item, index) => (
+                    <motion.div
+                      key={item}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 + index * 0.1 }}
+                      className="flex items-center gap-2"
+                    >
+                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/50">
+                        <Icons.check className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
+                      </span>
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {item}
+                      </span>
+                    </motion.div>
+                  ))}
                 </div>
               </MotionWrapper>
 
-              {/* Social Proof - Avatars & Rating */}
+              {/* Social Proof - ENHANCED VISIBILITY */}
               <MotionWrapper animation="fadeInUp" delay={0.6}>
-                <div className="mt-8 flex items-center gap-4">
+                <div className="mt-10 flex items-center gap-5 p-4 rounded-2xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 shadow-sm">
                   {/* Avatar Stack */}
                   <div className="flex -space-x-3">
                     {[
-                      "from-brand-400 to-purple-400",
-                      "from-purple-400 to-pink-400",
-                      "from-pink-400 to-orange-400",
-                      "from-orange-400 to-yellow-400",
-                      "from-green-400 to-teal-400",
-                    ].map((gradient, i) => (
+                      { gradient: "from-brand-500 to-brand-600", initials: "JD" },
+                      { gradient: "from-purple-500 to-purple-600", initials: "SK" },
+                      { gradient: "from-pink-500 to-pink-600", initials: "MR" },
+                      { gradient: "from-amber-500 to-orange-500", initials: "AL" },
+                      { gradient: "from-emerald-500 to-teal-500", initials: "TC" },
+                    ].map((avatar, i) => (
                       <motion.div
                         key={i}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.8 + i * 0.1 }}
+                        initial={{ opacity: 0, scale: 0, x: -10 }}
+                        animate={{ opacity: 1, scale: 1, x: 0 }}
+                        transition={{ 
+                          delay: 0.8 + i * 0.1,
+                          type: "spring",
+                          stiffness: 200,
+                          damping: 15
+                        }}
                         className={cn(
-                          "h-10 w-10 rounded-full border-2 border-background",
-                          `bg-gradient-to-br ${gradient}`
+                          "relative h-10 w-10 rounded-full border-2 border-white dark:border-gray-800 shadow-md",
+                          `bg-gradient-to-br ${avatar.gradient}`,
+                          "flex items-center justify-center"
                         )}
-                      />
+                      >
+                        <span className="text-white text-xs font-bold drop-shadow-sm">
+                          {avatar.initials}
+                        </span>
+                      </motion.div>
                     ))}
+                    {/* More users indicator */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 1.3 }}
+                      className="relative h-10 w-10 rounded-full border-2 border-white dark:border-gray-800 bg-gray-100 dark:bg-gray-800 flex items-center justify-center shadow-md"
+                    >
+                      <span className="text-xs font-bold text-gray-600 dark:text-gray-300">
+                        +2k
+                      </span>
+                    </motion.div>
                   </div>
+
+                  {/* Divider */}
+                  <div className="h-10 w-px bg-gray-300 dark:bg-gray-600" />
 
                   {/* Rating */}
                   <div className="flex flex-col">
-                    <div className="flex items-center gap-1">
-                      {[1, 2, 3, 4, 5].map((i) => (
-                        <motion.span
-                          key={i}
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 1 + i * 0.05 }}
-                        >
-                          <Icons.star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        </motion.span>
-                      ))}
-                      <span className="ml-1 font-bold text-foreground">4.9</span>
+                    <div className="flex items-center gap-1.5">
+                      <div className="flex items-center">
+                        {[1, 2, 3, 4, 5].map((i) => (
+                          <motion.span
+                            key={i}
+                            initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                            transition={{ 
+                              delay: 1 + i * 0.08,
+                              type: "spring",
+                              stiffness: 200
+                            }}
+                          >
+                            <Icons.star className="h-5 w-5 fill-amber-400 text-amber-400" />
+                          </motion.span>
+                        ))}
+                      </div>
+                      <motion.span 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.5 }}
+                        className="ml-1 text-lg font-bold text-gray-900 dark:text-white"
+                      >
+                        4.9
+                      </motion.span>
                     </div>
-                    <span className="text-xs text-muted-foreground">
-                      from 2,000+ happy creators
-                    </span>
+                    <motion.span 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1.6 }}
+                      className="text-sm text-gray-600 dark:text-gray-400"
+                    >
+                      from <span className="font-semibold text-gray-900 dark:text-white">2,000+</span> creators
+                    </motion.span>
                   </div>
                 </div>
               </MotionWrapper>
@@ -235,7 +295,7 @@ export function HeroSection() {
           <MotionWrapper animation="fadeInUp" delay={0.2} className="mt-20 md:mt-28 lg:mt-32">
             <div className="relative">
               {/* Decorative line */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-12 bg-gradient-to-b from-transparent via-border to-transparent -mt-12 hidden md:block" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent -mt-12 hidden md:block" />
               <HeroStats stats={heroData.stats} />
             </div>
           </MotionWrapper>
@@ -243,11 +303,21 @@ export function HeroSection() {
           {/* Trusted By Section */}
           <div className="mt-20 md:mt-24 lg:mt-28">
             <MotionWrapper animation="fadeInUp">
-              <p className="text-center text-sm font-medium text-muted-foreground mb-8 uppercase tracking-wider">
-                {heroData.trustedBy.label}
-              </p>
+              <div className="flex items-center justify-center gap-4 mb-8">
+                <div className="h-px flex-1 max-w-[100px] bg-gradient-to-r from-transparent to-gray-300 dark:to-gray-600" />
+                <p className="text-center text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-widest">
+                  {heroData.trustedBy.label}
+                </p>
+                <div className="h-px flex-1 max-w-[100px] bg-gradient-to-l from-transparent to-gray-300 dark:to-gray-600" />
+              </div>
             </MotionWrapper>
-            <CompanyLogos variant="carousel" />
+
+            {/* Trusted By Section */}
+            <div className="mt-20 md:mt-24 lg:mt-32">
+              <CompanyLogos 
+                variant="carosel"  // or "marquee" for the scrolling version
+              />
+            </div>
           </div>
         </div>
 

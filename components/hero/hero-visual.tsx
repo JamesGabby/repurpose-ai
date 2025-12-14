@@ -13,9 +13,25 @@ interface HeroVisualProps {
 export function HeroVisual({ className }: HeroVisualProps) {
   return (
     <div className={cn("relative", className)}>
-      {/* Glow effects */}
-      <div className="absolute -inset-4 bg-gradient-to-r from-brand-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-3xl opacity-60" />
-      <div className="absolute -inset-4 bg-gradient-to-tr from-brand-600/10 to-transparent rounded-3xl blur-2xl" />
+      {/* Improved glow effects with new colors */}
+      <div className="absolute -inset-4 rounded-3xl blur-3xl opacity-60">
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-500/30 via-purple-500/25 to-pink-500/20 rounded-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-brand-600/20 via-transparent to-cyan-500/10 rounded-3xl" />
+      </div>
+      
+      {/* Animated glow ring */}
+      <motion.div 
+        className="absolute -inset-1 rounded-2xl opacity-75"
+        animate={{
+          background: [
+            "linear-gradient(0deg, hsla(252, 91%, 60%, 0.2), hsla(280, 87%, 60%, 0.1), hsla(330, 81%, 60%, 0.2))",
+            "linear-gradient(180deg, hsla(252, 91%, 60%, 0.2), hsla(280, 87%, 60%, 0.1), hsla(330, 81%, 60%, 0.2))",
+            "linear-gradient(360deg, hsla(252, 91%, 60%, 0.2), hsla(280, 87%, 60%, 0.1), hsla(330, 81%, 60%, 0.2))",
+          ],
+        }}
+        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+        style={{ filter: "blur(20px)" }}
+      />
 
       {/* Main App Window */}
       <motion.div
@@ -25,39 +41,34 @@ export function HeroVisual({ className }: HeroVisualProps) {
         className="relative"
       >
         <div className="relative rounded-2xl border border-border/50 bg-background/95 backdrop-blur-xl shadow-2xl overflow-hidden">
-          {/* Window Header */}
-          <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-muted/30">
+          {/* Window Header - Improved styling */}
+          <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-gradient-to-r from-muted/50 to-muted/30">
             <div className="flex items-center gap-1.5">
-              <div className="h-3 w-3 rounded-full bg-red-500/80 hover:bg-red-500 transition-colors" />
-              <div className="h-3 w-3 rounded-full bg-yellow-500/80 hover:bg-yellow-500 transition-colors" />
-              <div className="h-3 w-3 rounded-full bg-green-500/80 hover:bg-green-500 transition-colors" />
+              <div className="h-3 w-3 rounded-full bg-red-400 hover:bg-red-500 transition-colors shadow-sm" />
+              <div className="h-3 w-3 rounded-full bg-amber-400 hover:bg-amber-500 transition-colors shadow-sm" />
+              <div className="h-3 w-3 rounded-full bg-emerald-400 hover:bg-emerald-500 transition-colors shadow-sm" />
             </div>
             <div className="flex-1 text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-muted/50">
-                <div className="h-3 w-3 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-xs font-medium text-muted-foreground">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-background/80 border border-border/50">
+                <div className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse shadow-sm shadow-emerald-500/50" />
+                <span className="text-xs font-medium text-foreground/80">
                   RepurposeAI Dashboard
                 </span>
               </div>
             </div>
-            <div className="w-[52px]" /> {/* Spacer for symmetry */}
+            <div className="w-[52px]" />
           </div>
 
           {/* App Content */}
           <div className="p-6 space-y-6">
-            {/* Input Section */}
             <InputSection />
-
-            {/* Processing Animation */}
             <ProcessingIndicator />
-
-            {/* Output Cards */}
             <OutputSection />
           </div>
         </div>
       </motion.div>
 
-      {/* Floating Elements */}
+      {/* Floating Elements with improved colors */}
       <FloatingElements />
     </div>
   );
@@ -74,18 +85,20 @@ function InputSection() {
   return (
     <div>
       <div className="flex items-center justify-between mb-2">
-        <label className="text-sm font-medium text-foreground">
+        <label className="text-sm font-semibold text-foreground">
           Source Content
         </label>
-        <span className="text-xs text-muted-foreground">Blog Post</span>
+        <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-brand-100 text-brand-700 dark:bg-brand-950 dark:text-brand-300">
+          Blog Post
+        </span>
       </div>
-      <div className="relative rounded-xl border border-border bg-muted/30 p-4 min-h-[80px]">
+      <div className="relative rounded-xl border border-border bg-muted/30 p-4 min-h-[80px] transition-all hover:border-brand-300/50">
         <AnimatePresence>
           {showContent && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-sm text-foreground"
+              className="text-sm text-foreground/90 leading-relaxed"
             >
               <TypewriterEffect
                 text="10 Proven Strategies to Grow Your SaaS Business in 2024: A comprehensive guide covering customer acquisition, retention, pricing optimization..."
@@ -100,7 +113,7 @@ function InputSection() {
           transition={{ delay: 3.5 }}
           className="absolute -right-2 -top-2"
         >
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-green-500 text-white shadow-lg">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/30">
             <Icons.check className="h-3.5 w-3.5" />
           </span>
         </motion.div>
@@ -133,15 +146,15 @@ function ProcessingIndicator() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="flex items-center justify-center gap-3 py-4"
+          className="flex items-center justify-center gap-3 py-4 px-4 rounded-xl bg-brand-50 dark:bg-brand-950/50 border border-brand-200 dark:border-brand-800"
         >
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           >
-            <Icons.loader className="h-5 w-5 text-brand-500" />
+            <Icons.loader className="h-5 w-5 text-brand-600 dark:text-brand-400" />
           </motion.div>
-          <span className="text-sm font-medium text-muted-foreground">
+          <span className="text-sm font-medium text-brand-700 dark:text-brand-300">
             AI is generating your content...
           </span>
         </motion.div>
@@ -156,6 +169,8 @@ function OutputSection() {
       platform: "Twitter Thread",
       icon: <Icons.twitter className="h-4 w-4" />,
       color: "#1DA1F2",
+      bgColor: "bg-sky-50 dark:bg-sky-950/30",
+      borderColor: "border-sky-200 dark:border-sky-800",
       content: "🧵 Thread: 10 strategies that helped us grow from $0 to $1M ARR in 18 months...",
       delay: 5.8,
     },
@@ -163,6 +178,8 @@ function OutputSection() {
       platform: "LinkedIn Post",
       icon: <Icons.linkedin className="h-4 w-4" />,
       color: "#0A66C2",
+      bgColor: "bg-blue-50 dark:bg-blue-950/30",
+      borderColor: "border-blue-200 dark:border-blue-800",
       content: "I've spent 5 years building SaaS companies. Here's what actually works in 2024...",
       delay: 6.3,
     },
@@ -170,6 +187,8 @@ function OutputSection() {
       platform: "Instagram Carousel",
       icon: <Icons.instagram className="h-4 w-4" />,
       color: "#E4405F",
+      bgColor: "bg-pink-50 dark:bg-pink-950/30",
+      borderColor: "border-pink-200 dark:border-pink-800",
       content: "Swipe → to discover the 10 growth strategies every SaaS founder needs to know...",
       delay: 6.8,
     },
@@ -183,13 +202,15 @@ function OutputSection() {
         transition={{ delay: 5.5 }}
         className="flex items-center justify-between"
       >
-        <label className="text-sm font-medium text-foreground">
+        <label className="text-sm font-semibold text-foreground">
           Generated Content
         </label>
-        <span className="text-xs text-green-600 font-medium">3 platforms ready</span>
+        <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
+          3 platforms ready
+        </span>
       </motion.div>
 
-      {outputs.map((output, index) => (
+      {outputs.map((output) => (
         <OutputCard key={output.platform} {...output} />
       ))}
     </div>
@@ -200,11 +221,13 @@ interface OutputCardProps {
   platform: string;
   icon: React.ReactNode;
   color: string;
+  bgColor: string;
+  borderColor: string;
   content: string;
   delay: number;
 }
 
-function OutputCard({ platform, icon, color, content, delay }: OutputCardProps) {
+function OutputCard({ platform, icon, color, bgColor, borderColor, content, delay }: OutputCardProps) {
   const [isVisible, setIsVisible] = React.useState(false);
   const [isCopied, setIsCopied] = React.useState(false);
 
@@ -225,17 +248,24 @@ function OutputCard({ platform, icon, color, content, delay }: OutputCardProps) 
           initial={{ opacity: 0, x: -20, height: 0 }}
           animate={{ opacity: 1, x: 0, height: "auto" }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="flex items-start gap-3 rounded-xl border border-border/50 bg-card p-3 hover:border-border hover:shadow-md transition-all duration-200"
+          className={cn(
+            "flex items-start gap-3 rounded-xl border p-3",
+            "bg-card hover:shadow-lg transition-all duration-200",
+            borderColor,
+            "hover:border-brand-300 dark:hover:border-brand-700"
+          )}
         >
           <div
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg shadow-sm"
-            style={{ backgroundColor: `${color}15` }}
+            className={cn(
+              "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg",
+              bgColor
+            )}
           >
             <span style={{ color }}>{icon}</span>
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-1">
-              <span className="text-sm font-semibold">{platform}</span>
+              <span className="text-sm font-semibold text-foreground">{platform}</span>
               <div className="flex items-center gap-1">
                 <motion.button
                   whileHover={{ scale: 1.1 }}
@@ -244,9 +274,9 @@ function OutputCard({ platform, icon, color, content, delay }: OutputCardProps) 
                   className="p-1.5 rounded-md hover:bg-muted transition-colors"
                 >
                   {isCopied ? (
-                    <Icons.check className="h-3.5 w-3.5 text-green-500" />
+                    <Icons.check className="h-3.5 w-3.5 text-emerald-500" />
                   ) : (
-                    <Icons.copy className="h-3.5 w-3.5 text-muted-foreground" />
+                    <Icons.copy className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
                   )}
                 </motion.button>
                 <motion.button
@@ -254,7 +284,7 @@ function OutputCard({ platform, icon, color, content, delay }: OutputCardProps) 
                   whileTap={{ scale: 0.95 }}
                   className="p-1.5 rounded-md hover:bg-muted transition-colors"
                 >
-                  <Icons.arrowUpRight className="h-3.5 w-3.5 text-muted-foreground" />
+                  <Icons.arrowUpRight className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
                 </motion.button>
               </div>
             </div>
@@ -299,7 +329,7 @@ function TypewriterEffect({ text, speed = 30 }: TypewriterEffectProps) {
         <motion.span
           animate={{ opacity: [1, 0] }}
           transition={{ duration: 0.4, repeat: Infinity, repeatType: "reverse" }}
-          className="inline-block w-0.5 h-4 bg-brand-500 ml-0.5 align-middle"
+          className="inline-block w-0.5 h-4 bg-brand-500 ml-0.5 align-middle rounded-full"
         />
       )}
     </span>
@@ -310,29 +340,33 @@ function FloatingElements() {
   const elements = [
     {
       icon: Icons.zap,
-      color: "text-yellow-500",
-      bgColor: "bg-yellow-500/10",
+      color: "text-amber-500",
+      bgColor: "bg-amber-100 dark:bg-amber-950/50",
+      borderColor: "border-amber-200 dark:border-amber-800",
       position: "-top-4 -right-4 md:top-4 md:-right-8",
       delay: 0.8,
     },
     {
       icon: Icons.sparkles,
       color: "text-purple-500",
-      bgColor: "bg-purple-500/10",
+      bgColor: "bg-purple-100 dark:bg-purple-950/50",
+      borderColor: "border-purple-200 dark:border-purple-800",
       position: "-bottom-4 -left-4 md:bottom-8 md:-left-8",
       delay: 1.0,
     },
     {
       icon: Icons.trendingUp,
-      color: "text-green-500",
-      bgColor: "bg-green-500/10",
+      color: "text-emerald-500",
+      bgColor: "bg-emerald-100 dark:bg-emerald-950/50",
+      borderColor: "border-emerald-200 dark:border-emerald-800",
       position: "top-1/4 -left-4 md:-left-12",
       delay: 1.2,
     },
     {
       icon: Icons.clock,
-      color: "text-blue-500",
-      bgColor: "bg-blue-500/10",
+      color: "text-sky-500",
+      bgColor: "bg-sky-100 dark:bg-sky-950/50",
+      borderColor: "border-sky-200 dark:border-sky-800",
       position: "top-1/2 -right-4 md:-right-10",
       delay: 1.4,
     },
@@ -354,7 +388,9 @@ function FloatingElements() {
           className={cn(
             "absolute hidden sm:flex",
             el.position,
-            "h-12 w-12 items-center justify-center rounded-2xl bg-background shadow-lg border border-border/50"
+            "h-12 w-12 items-center justify-center rounded-2xl",
+            "bg-background shadow-lg border",
+            el.borderColor
           )}
         >
           <motion.div
