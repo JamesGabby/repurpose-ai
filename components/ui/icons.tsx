@@ -34,6 +34,8 @@ import {
   Palette,
   Calendar,
   Search,
+  Github,
+  HelpCircle,
   type LucideIcon,
 } from "lucide-react";
 
@@ -74,6 +76,8 @@ export const Icons = {
   palette: Palette,
   calendar: Calendar,
   search: Search,
+  github: Github,
+  helpCircle: HelpCircle,
   // Platform specific
   tiktok: ({ className }: { className?: string }) => (
     <svg
