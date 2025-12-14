@@ -12,7 +12,11 @@ import { Icons } from "@/components/ui/icons";
 import { DesktopNav } from "./desktop-nav";
 import { MobileNav } from "./mobile-nav";
 
-export function Header() {
+interface HeaderProps {
+  announcementVisible?: boolean;
+}
+
+export function Header({ announcementVisible = false }: HeaderProps) {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const { scrollY } = useScroll();
@@ -25,11 +29,14 @@ export function Header() {
     <>
       <motion.header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "fixed left-0 right-0 z-50 transition-all duration-300", // Change top-0 to just fixed
           isScrolled
             ? "bg-white/90 dark:bg-gray-950/90 backdrop-blur-xl border-b border-gray-200 dark:border-gray-800 shadow-sm"
             : "bg-transparent"
         )}
+        style={{
+          top: announcementVisible ? 40 : 0, // ADD THIS - 40px is approximate banner height
+        }}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
@@ -64,8 +71,8 @@ export function Header() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="hidden md:flex items-center gap-3"
             >
-              <CustomButton 
-                variant="ghost" 
+              <CustomButton
+                variant="ghost"
                 size="sm"
                 className={cn(
                   "transition-colors duration-200",
