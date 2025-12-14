@@ -2,10 +2,10 @@
 
 // src/components/ui/glowing-card.tsx
 import * as React from "react";
-import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue, type HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface GlowingCardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface GlowingCardProps extends Omit<HTMLMotionProps<"div">, "children"> {
   children: React.ReactNode;
   glowColor?: string;
   borderRadius?: string;
@@ -21,11 +21,8 @@ export function GlowingCard({
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  function handleMouseMove({
-    currentTarget,
-    clientX,
-    clientY,
-  }: React.MouseEvent<HTMLDivElement>) {
+  function handleMouseMove(event: React.MouseEvent<HTMLDivElement>) {
+    const { currentTarget, clientX, clientY } = event;
     const { left, top } = currentTarget.getBoundingClientRect();
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
