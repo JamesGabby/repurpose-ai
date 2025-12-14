@@ -10,10 +10,11 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const calSans = localFont({
-  src: "../fonts/CalSans-Regular.woff2",
+// Alternative without Cal Sans - update layout.tsx
+const calSans = Inter({
+  subsets: ["latin"],
   variable: "--font-cal",
-  display: "swap",
+  weight: ["600", "700"],
 });
 
 export const metadata: Metadata = {
