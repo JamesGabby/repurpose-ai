@@ -409,7 +409,7 @@ export function HeroSection() {
           </MotionWrapper>
 
           {/* Trusted By Section - Responsive spacing */}
-          <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-28">
+          {/* <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-28">
             <MotionWrapper animation="fadeInUp">
               <div className="flex items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
                 <div className="h-px flex-1 max-w-[60px] sm:max-w-[100px] bg-gradient-to-r from-transparent to-gray-300 dark:to-gray-600" />
@@ -421,7 +421,7 @@ export function HeroSection() {
             </MotionWrapper>
 
             <CompanyLogos variant="carousel" />
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom gradient fade - Responsive height */}
