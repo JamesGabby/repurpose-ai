@@ -27,7 +27,7 @@ export function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           isScrolled
-            ? "bg-background/80 backdrop-blur-xl border-b shadow-sm"
+            ? "bg-white/90 dark:bg-gray-950/90 backdrop-blur-xl border-b border-gray-200 dark:border-gray-800 shadow-sm"
             : "bg-transparent"
         )}
         initial={{ y: -100 }}
@@ -43,7 +43,7 @@ export function Header() {
               transition={{ duration: 0.5 }}
             >
               <Link href="/" className="flex items-center">
-                <Logo />
+                <Logo isScrolled={isScrolled} />
               </Link>
             </motion.div>
 
@@ -54,7 +54,7 @@ export function Header() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="hidden md:block"
             >
-              <DesktopNav items={mainNavItems} />
+              <DesktopNav items={mainNavItems} isScrolled={isScrolled} />
             </motion.div>
 
             {/* Desktop CTAs */}
@@ -64,13 +64,23 @@ export function Header() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="hidden md:flex items-center gap-3"
             >
-              <CustomButton variant="ghost" size="sm">
+              <CustomButton 
+                variant="ghost" 
+                size="sm"
+                className={cn(
+                  "transition-colors duration-200",
+                  isScrolled
+                    ? "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+                    : "text-gray-800 dark:text-white hover:text-gray-900 dark:hover:text-white hover:bg-white/20 dark:hover:bg-white/10"
+                )}
+              >
                 Sign In
               </CustomButton>
               <CustomButton
                 variant="gradient"
                 size="sm"
                 rightIcon={<Icons.arrowRight className="h-4 w-4" />}
+                className="shadow-lg shadow-brand-500/25"
               >
                 Start Free Trial
               </CustomButton>
@@ -81,7 +91,12 @@ export function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="flex md:hidden items-center justify-center rounded-full p-2 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+              className={cn(
+                "flex md:hidden items-center justify-center rounded-full p-2 transition-colors",
+                isScrolled
+                  ? "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  : "text-gray-800 dark:text-white hover:bg-white/20 dark:hover:bg-white/10"
+              )}
               onClick={() => setIsMobileMenuOpen(true)}
             >
               <Icons.menu className="h-6 w-6" />
@@ -93,7 +108,7 @@ export function Header() {
         {/* Gradient border on scroll */}
         {isScrolled && (
           <motion.div
-            className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-500/20 to-transparent"
+            className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-500/30 to-transparent"
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 0.3 }}

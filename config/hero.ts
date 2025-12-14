@@ -1,7 +1,7 @@
 // src/config/hero.ts
 
 export const heroData = {
-  badge: "🎉 Now with GPT-4o & Claude 3.5 Support",
+  badge: "🎉 Now with GPT-5.2 & Claude 4.5 Support",
   headline: {
     main: "Transform One Piece of Content Into",
     highlight: "Dozens",

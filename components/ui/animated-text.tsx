@@ -208,15 +208,23 @@ export function RotatingText({
   }, [texts.length, interval]);
 
   return (
-    <span className={cn("relative inline-block", className)}>
+    <span 
+      className={cn(
+        "relative inline-flex items-center justify-center overflow-hidden",
+        className
+      )}
+    >
       <AnimatePresence mode="wait">
         <motion.span
           key={currentIndex}
-          initial={{ y: 20, opacity: 0, rotateX: -90 }}
-          animate={{ y: 0, opacity: 1, rotateX: 0 }}
-          exit={{ y: -20, opacity: 0, rotateX: 90 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="inline-block"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -20, opacity: 0 }}
+          transition={{ 
+            duration: 0.3, 
+            ease: [0.4, 0, 0.2, 1] // Smooth easing
+          }}
+          className="inline-flex items-center justify-center whitespace-nowrap"
         >
           {texts[currentIndex]}
         </motion.span>

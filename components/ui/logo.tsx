@@ -6,6 +6,7 @@ interface LogoProps {
   className?: string;
   showText?: boolean;
   size?: "sm" | "default" | "lg";
+  isScrolled?: boolean;
 }
 
 export function Logo({ className, showText = true, size = "default" }: LogoProps) {
@@ -31,15 +32,16 @@ export function Logo({ className, showText = true, size = "default" }: LogoProps
       >
         <Sparkles className="h-1/2 w-1/2" />
       </div>
+      {/* Logo Text */}
       {showText && (
         <span
           className={cn(
-            "font-heading font-bold tracking-tight",
-            textSizeClasses[size]
+            "text-xl font-bold tracking-tight transition-colors duration-200",
+            // Always high contrast - visible on any background
+            "text-gray-900 dark:text-white"
           )}
         >
-          Repurpose
-          <span className="text-brand-500">AI</span>
+          RepurposeAI
         </span>
       )}
     </div>
